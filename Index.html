@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon.ico">
+<meta name="theme-color" content="#020617">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Tracker</title>
+
+<style>
+body{
+ margin:0;background:#020617;color:#e5e7eb;
+ font-family:system-ui;
+ display:flex;justify-content:center;
+}
+.app{max-width:800px;width:100%;padding:15px}
+header{text-align:center;font-size:26px;font-weight:700}
+
+.card{
+ background:#0f172a;padding:12px;
+ border-radius:16px;margin-bottom:12px
+}
+input,select,button{
+ width:100%;padding:10px;
+ margin-top:8px;border:none;border-radius:10px
+}
+button{
+ background:#6366f1;color:white;
+ cursor:pointer;font-size:16px
+}
+.genres{
+ display:flex;flex-wrap:wrap;gap:6px;margin-top:8px
+}
+.genres label{
+ padding:6px 10px;
+ border-radius:12px;
+ font-size:13px;
+ cursor:pointer;
+ user-select:none;
+ color:white;
+}
+.genres input{display:none}
+
+.list{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:12px
+}
+.anime{
+ background:#020617;padding:12px;border-radius:16px
+}
+.tag{
+ display:inline-block;
+ padding:4px 8px;
+ border-radius:10px;
+ font-size:12px;
+ margin:2px;
+ color:white
+}
+.del{background:#ef4444;margin-top:6px}
+
+/* GENRE COLORS */
+.Action{background:#ef4444}
+.Adventure{background:#10b981}
+.Cars{background:#f97316}
+.Comedy{background:#facc15;color:black}
+.Dementia{background:#8b5cf6}
+.Demons{background:#dc2626}
+.Mystery{background:#6366f1}
+.Drama{background:#fb923c}
+.Ecchi{background:#db2777}
+.Fantasy{background:#a855f7}
+.Game{background:#14b8a6}
+.Historical{background:#c084fc}
+.Horror{background:#6b7280}
+.Kids{background:#facc15;color:black}
+.Magic{background:#9333ea}
+.MartialArts{background:#ea580c}
+.Mecha{background:#0ea5e9}
+.Music{background:#f472b6}
+.Parody{background:#84cc16}
+.Samurai{background:#b91c1c}
+.Romance{background:#ec4899}
+.School{background:#3b82f6}
+.SciFi{background:#22d3ee;color:black}
+.Shoujo{background:#f472b6}
+.ShoujoAi{background:#db2777}
+.Shounen{background:#ef4444}
+.ShounenAi{background:#be185d}
+.Space{background:#6366f1}
+.Sports{background:#22c55e}
+.SuperPower{background:#f43f5e}
+.Vampire{background:#7c3aed}
+.Yaoi{background:#a21caf}
+.Yuri{background:#d946ef}
+.Harem{background:#fb7185}
+.SliceOfLife{background:#ca8a04}
+.Supernatural{background:#6d28d9}
+.Military{background:#374151}
+.Police{background:#1d4ed8}
+.Psychological{background:#4b5563}
+.Thriller{background:#111827}
+.Seinen{background:#0f172a}
+.Josei{background:#f472b6}
+.Isekai{background:#3b82f6}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>🎌 Anime Tracker</header>
+
+<div class="card">
+ <input id="name" placeholder="Anime name">
+ <input id="rating" type="number" step="0.1" placeholder="Rating (0-10)">
+
+ <select id="status">
+  <option value="">Status</option>
+  <option>Watching</option>
+  <option>Completed</option>
+  <option>Planned</option>
+ </select>
+
+ <div class="genres">
+
+<label class="Action"><input type="checkbox" value="Action"> Action</label>
+<label class="Adventure"><input type="checkbox" value="Adventure"> Adventure</label>
+<label class="Cars"><input type="checkbox" value="Cars"> Cars</label>
+<label class="Comedy"><input type="checkbox" value="Comedy"> Comedy</label>
+<label class="Dementia"><input type="checkbox" value="Dementia"> Dementia</label>
+<label class="Demons"><input type="checkbox" value="Demons"> Demons</label>
+<label class="Mystery"><input type="checkbox" value="Mystery"> Mystery</label>
+<label class="Drama"><input type="checkbox" value="Drama"> Drama</label>
+<label class="Ecchi"><input type="checkbox" value="Ecchi"> Ecchi</label>
+<label class="Fantasy"><input type="checkbox" value="Fantasy"> Fantasy</label>
+<label class="Game"><input type="checkbox" value="Game"> Game</label>
+<label class="Historical"><input type="checkbox" value="Historical"> Historical</label>
+<label class="Horror"><input type="checkbox" value="Horror"> Horror</label>
+<label class="Kids"><input type="checkbox" value="Kids"> Kids</label>
+<label class="Magic"><input type="checkbox" value="Magic"> Magic</label>
+<label class="MartialArts"><input type="checkbox" value="MartialArts"> Martial Arts</label>
+<label class="Mecha"><input type="checkbox" value="Mecha"> Mecha</label>
+<label class="Music"><input type="checkbox" value="Music"> Music</label>
+<label class="Parody"><input type="checkbox" value="Parody"> Parody</label>
+<label class="Samurai"><input type="checkbox" value="Samurai"> Samurai</label>
+<label class="Romance"><input type="checkbox" value="Romance"> Romance</label>
+<label class="School"><input type="checkbox" value="School"> School</label>
+<label class="SciFi"><input type="checkbox" value="SciFi"> Sci-Fi</label>
+<label class="Shoujo"><input type="checkbox" value="Shoujo"> Shoujo</label>
+<label class="ShoujoAi"><input type="checkbox" value="ShoujoAi"> Shoujo Ai</label>
+<label class="Shounen"><input type="checkbox" value="Shounen"> Shounen</label>
+<label class="ShounenAi"><input type="checkbox" value="ShounenAi"> Shounen Ai</label>
+<label class="Space"><input type="checkbox" value="Space"> Space</label>
+<label class="Sports"><input type="checkbox" value="Sports"> Sports</label>
+<label class="SuperPower"><input type="checkbox" value="SuperPower"> Super Power</label>
+<label class="Vampire"><input type="checkbox" value="Vampire"> Vampire</label>
+<label class="Yaoi"><input type="checkbox" value="Yaoi"> Yaoi</label>
+<label class="Yuri"><input type="checkbox" value="Yuri"> Yuri</label>
+<label class="Harem"><input type="checkbox" value="Harem"> Harem</label>
+<label class="SliceOfLife"><input type="checkbox" value="SliceOfLife"> Slice of Life</label>
+<label class="Supernatural"><input type="checkbox" value="Supernatural"> Supernatural</label>
+<label class="Military"><input type="checkbox" value="Military"> Military</label>
+<label class="Police"><input type="checkbox" value="Police"> Police</label>
+<label class="Psychological"><input type="checkbox" value="Psychological"> Psychological</label>
+<label class="Thriller"><input type="checkbox" value="Thriller"> Thriller</label>
+<label class="Seinen"><input type="checkbox" value="Seinen"> Seinen</label>
+<label class="Josei"><input type="checkbox" value="Josei"> Josei</label>
+<label class="Isekai"><input type="checkbox" value="Isekai"> Isekai</label>
+
+ </div>
+
+ <button id="addBtn">Add Anime</button>
+</div>
+
+<div class="card">
+ <input id="search" placeholder="Search...">
+ <button id="sortBtn">Sort by Rating ⭐</button>
+</div>
+
+<div id="list" class="list"></div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+ let data = JSON.parse(localStorage.getItem("animeData")) || {};
+ const save = () => localStorage.setItem("animeData", JSON.stringify(data));
+ const list = document.getElementById("list");
+
+ function render(){
+  list.innerHTML="";
+  for(let n in data){
+   const a=data[n];
+   list.innerHTML+=`
+    <div class="anime">
+     ${a.genres.map(g=>`<span class="tag ${g}">${g}</span>`).join("")}
+     <span class="tag">${a.status}</span>
+     <h3>${n}</h3>
+     <p>⭐ ${a.rating}</p>
+     <button class="del" data-name="${n}">Delete</button>
+    </div>`;
+  }
+ }
+
+ document.getElementById("addBtn").addEventListener("click",()=>{
+  const name=document.getElementById("name").value.trim();
+  const rating=parseFloat(document.getElementById("rating").value);
+  const status=document.getElementById("status").value;
+  const genres=[...document.querySelectorAll(".genres input:checked")].map(x=>x.value);
+
+  if(!name||isNaN(rating)||rating<0||rating>10||!status||genres.length===0){
+   alert("Fill all fields");
+   return;
+  }
+
+  data[name]={rating, status, genres};
+  save(); render();
+ });
+
+ document.getElementById("sortBtn").addEventListener("click",()=>{
+  data=Object.fromEntries(Object.entries(data).sort((a,b)=>b[1].rating-a[1].rating));
+  save(); render();
+ });
+
+ document.getElementById("search").addEventListener("input",(e)=>{
+  const v=e.target.value.toLowerCase();
+  list.querySelectorAll(".anime").forEach(c=>{
+   c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+  });
+ });
+
+ list.addEventListener("click",(e)=>{
+  if(e.target.classList.contains("del")){
+   delete data[e.target.dataset.name];
+   save(); render();
+  }
+ });
+
+ render();
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
